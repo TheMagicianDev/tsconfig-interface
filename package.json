@@ -1,0 +1,63 @@
+{
+  "name": "tsconfig-interface-generator",
+  "version": "1.0.0",
+  "description": "A module that expose utilities to generate tsconfig interface from the official json-schema. It's the module behind tsconfig-interface module generation.",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "dependencies": {
+    "json-schema-to-typescript": "^11.0.2",
+    "json5": "^2.2.1",
+    "node-fetch": "^3.2.10"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
+    "@babel/preset-env": "^7.18.10",
+    "@babel/preset-typescript": "^7.18.6",
+    "@jest/types": "^28.1.3",
+    "@swc/core": "^1.2.239",
+    "@swc/jest": "^0.2.22",
+    "@types/jest": "^28.1.7",
+    "jest": "^28.1.3",
+    "regenerator-runtime": "^0.13.9",
+    "ts-jest": "^28.0.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "build": "npm run ts:typeCheck && npm run build:js && npm run ts:dts",
+    "build:js": "npm run build:js:esm && npm run build:js:cjs",
+    "build:js:esm": "swc src --out-dir dist/esm --config-file swcrc.esm.json",
+    "build:js:cjs": "swc src --out-dir dist/cjs --config-file swcrc.cjs.json && spack --config $PWD/spack.config.cjs",
+    "ts:typeCheck": "tsc --noEmit",
+    "ts:dts": "npm run ts:dts:esm && npm run ts:dts:cjs",
+    "ts:dts:esm": "tsc --emitDeclarationOnly --outDir dist/esm",
+    "ts:dts:cjs": "tsc --emitDeclarationOnly --outDir dist/cjs",
+    "test": "jest test",
+    "interface:get": "node dist/scripts/getInterface.js",
+    "interface:generate": "node dist/scripts/generateInterface.js",
+    "interface:publish": "cd generated && npm version patch && npm publish",
+    "interface:generate:publish": "npm run interface:generate && npm run interface:publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "coming"
+  },
+  "keywords": [
+    "tsconfig",
+    "interface",
+    "from",
+    "json-schema",
+    "generate"
+  ],
+  "author": "Mohamed Lamine Allal <allalmohamedlamine@gmail.com>",
+  "license": "MIT",
+  "type": "module"
+}

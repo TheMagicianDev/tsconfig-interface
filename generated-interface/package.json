@@ -1,0 +1,23 @@
+{
+  "name": "tsconfig-interface",
+  "version": "1.0.1",
+  "description": "Package providing the tsconfig.json interface type. That is automatically generated from the official json schema from the schema store.",
+  "types": "tsconfig.d.ts",
+  "files": [
+    "tsconfig.d.ts",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "coming"
+  },
+  "keywords": [
+    "tsconfig",
+    "interface",
+    "from",
+    "json-schema",
+    "generated"
+  ],
+  "author": "Mohamed Lamine Allal <allalmohamedlamine@gmail.com>",
+  "license": "MIT"
+}
